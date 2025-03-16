@@ -1,0 +1,9 @@
+JMP loop
+MOV R0, R0
+MOV R0, R0
+MOV R0, R0
+MOV R0, R0
+MOV R0, R0
+loop 
+MOV R0, R0
+MOV R0, R0
