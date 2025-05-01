@@ -1,0 +1,28 @@
+MOV R0, #1 // op1 (15:0)
+LSL R0, R0, #8
+MOV R2, #5 // op2_shifted (15:0)
+LSL R2, R2, #7
+MOV R3, #0 // op2_shifted (31:16)
+MOV R4, #0 // sum (15:0)
+MOV R5, #0 // sum (31:16)
+
+start
+CMP R0, #0 // while(op1 != 0)
+JEQ end // jump to end of program if op1 = 0
+
+MOV R6, R0
+AND R6, #1 // if(op1 & 1)
+JEQ shift // // if does not fulfill conditions, skip past updating sum (PC = PC + 2)
+ADD R4, R2 // sum += op2_shifted (15:0)
+ADC R5, R3 // sum += op2_shifted (31:16)
+
+shift
+ADD R2, R2, R2 // multiword shift of op2_shifted (15:0)
+ADC R3, R3, R3 // multiword shift of op2_shifted (31:16)
+LSR R0, R0, #1
+JMP start // loop back
+
+end
+
+
+
